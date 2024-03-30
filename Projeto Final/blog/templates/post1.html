@@ -18,7 +18,7 @@
     <div class="div-dos-comentarios">
     <div class="div-dos-comentarios">
         <h3>Deixe seu comentário aqui: </h3>
-        <form action="{% url 'enviar2' %}" method="POST" id="form">
+        <form action="{% url 'resenha' id=id_do_livro %}" method="POST" id="form">
 
             {% csrf_token %}
 
@@ -32,7 +32,7 @@
             <p class="alert alert-success">Cadastro efetuado com sucesso! </p>
             {% endif %}
 
-            <button type="submit" class="btn btn-primary btn-block">Enviar comentário</button>
+            <button type="submit" class="btn btn-primary btn-block mb-3">Enviar comentário</button>
         </form>
     </div>
 
@@ -40,7 +40,21 @@
     
 
     <div class="comentarios-postados">
+        <h3>Comentários:</h3>
+        {% for comentario in comentarios %}
+        <section class="card mb-3">
+            <div class="card-body">
+                <div>
+                    <h5 class="card-title me-3">{{comentario.usuario}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{comentario.data2}}</h6>
+                </div>
+                <div class="card-text">
+                    {{comentario.comentario}}
+                </div>
+            </div>
 
+        </section>
+        {% endfor %}
     </div>
 
 {% endblock %}
