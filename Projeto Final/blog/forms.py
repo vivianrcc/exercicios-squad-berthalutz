@@ -1,5 +1,7 @@
 from django import forms
 from blog.models import Comentario
+from django.forms.widgets import HiddenInput
+
 
 class ComentarioForm(forms.ModelForm):    
     usuario = forms.CharField(

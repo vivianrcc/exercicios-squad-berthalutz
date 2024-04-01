@@ -17,13 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog.views import index_html
-from blog.views import resenha_do_livro, fazer_comentario 
+from blog.views import resenha_do_livro 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path ('', index_html ),
-    path('crepusculo', resenha_do_livro ),
-    # path('livro/<int:id>', resenha_do_livro ),
-    path('enviar', fazer_comentario, name='enviar2' ),
+    # path('crepusculo', resenha_do_livro, name='resenha' ),
+    path('livro/<int:id>', resenha_do_livro, name='resenha' ),
+    # path('enviar', resenha_do_livro, name='enviar2' ),
     # path('crepusculo', comentario )
 ]

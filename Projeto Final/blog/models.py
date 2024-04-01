@@ -16,7 +16,6 @@ class Post(models.Model):
     preview= models.TextField(blank=False, max_length=200, null=False)
     nota = models.IntegerField(blank=True, choices=nota_livro)
     content= models.TextField(blank=False, null=False)
-    slug= models.SlugField(default="", null=True)
 
     class Meta:
         ordering= ['-date']
@@ -28,6 +27,7 @@ class Comentario(models.Model):
     usuario = models.CharField(max_length=50, blank=True)
     comentario = models.TextField(blank=False, max_length=200)
     data2= models.DateField(auto_now_add=True)
+    id_livro = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'Comentário de {self.usuario}'
