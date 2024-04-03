@@ -1,17 +1,20 @@
 {% extends "index.html" %}
 {% load bootstrap5 %}
+{% bootstrap_css %}
+
 {% block principal %}
 
   {% for item in posts1 %}
-    <div class="div-dos-posts">
-        <h3 class="titulo">{{item.titulo}}</h1><br>
-        <h3 class="nota">Nota do livro: {{item.nota}}</h2><br>
-
-        <h4 class="preview">Preview:</h3>
-            <p>{{item.preview}}</p>
-        <a href="http://127.0.0.1:8000/{{item.id}}"><button>Continue Lendo</button></a> <br><br>
-
-
+    <div class="container div-dos-posts" id="postPreview">
+      <div class="row" id="postPreview_Row">
+        <div class="col-lg-8 mx-auto">
+          <h3 class="titulo">{{item.titulo}}</h1><br>
+            <h3 class="nota">Nota do livro: {{item.nota}}</h2><br>
+            <h4 class="preview">Preview:</h3>
+                <p>{{item.preview}}</p>
+            <a href="http://127.0.0.1:8000/livro/{{item.id}}"><button>Continue Lendo</button></a> <br><br>
+        </div>
+      </div>         
     </div>
   {% endfor %}
 {% endblock %}
