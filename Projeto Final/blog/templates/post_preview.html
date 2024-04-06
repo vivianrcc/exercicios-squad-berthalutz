@@ -9,7 +9,7 @@
 
         <h4 class="preview">Preview:</h3>
             <p>{{item.preview}}</p>
-        <a href="http://127.0.0.1:8000/{{item.id}}"><button>Continue Lendo</button></a> <br><br>
+        <a href="{% url 'resenha' id=item.id %}"><button class="btn btn-outline-primary">Continue Lendo</button></a> <br><br>
 
 
     </div>

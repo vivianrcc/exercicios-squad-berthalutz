@@ -21,7 +21,7 @@ class Post(models.Model):
         ordering= ['-date']
 
     def __str__(self):
-        return f'{self.titulo} - {self.autor} - {self.date}'
+        return f'{self.titulo} - {self.autor} - {self.nota}'
 
 class Comentario(models.Model):
     usuario = models.CharField(max_length=50, blank=True)
