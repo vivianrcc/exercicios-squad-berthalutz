@@ -39,9 +39,20 @@ def get_resenha(request, dataToBePassed):
 #view do formulário de comentários (função chamada acima)
 def post_resenha(request, dataToBePassed):
     form = ComentarioForm(request.POST)
+    # print('form', form['usuario'].value() )
     if form.is_valid():
-        form.save()
+        # form.save()
         dataToBePassed['sucesso'] = True
+        post_instance = Post.objects.get(id=dataToBePassed['id_do_livro'])
+
+        new_comment = Comentario(
+            usuario=form['usuario'].value(),
+            comentario=form['comentario'].value(),
+            id_livro= post_instance
+        )
+        new_comment.save()
+
+
         return render(request, 'post1.html', dataToBePassed)
 
 #view da barra de pesquisa
