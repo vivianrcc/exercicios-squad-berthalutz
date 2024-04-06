@@ -26,7 +26,7 @@ class Post(models.Model):
 class Comentario(models.Model):
     usuario = models.CharField(max_length=50, blank=True)
     comentario = models.TextField(blank=False, max_length=200)
-    data2= models.DateField(auto_now_add=True)
+    data2= models.DateTimeField(auto_now_add=True)
     id_livro = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
