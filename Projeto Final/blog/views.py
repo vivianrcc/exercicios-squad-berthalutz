@@ -68,8 +68,7 @@ def pesquisar_livro(request):
                     Post.objects.filter(autor__icontains=pesquisa) | \
                     Post.objects.filter(content__icontains=pesquisa)
                 print('consulta', consulta[0].id)
-            return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
+            return render(request, 'resultado_pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
         except ValueError:
             consulta = Post.objects.all()
-            return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
-
+            return render(request, 'resultado_pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
