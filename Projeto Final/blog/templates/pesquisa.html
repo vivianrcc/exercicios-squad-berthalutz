@@ -1,18 +1,11 @@
-
-{% block pesquisa %}
-
-
-    <nav class="navbar bg-body-tertiary" id="navPesquisa">
-        <div class=" container-fluid d-flex justify-content-center">
-            <form method="GET" id="search-form" class="d-flex shadow p-3 mb-5 bg-body-tertiary rounded" role="search" action="{% url 'pesquisa' %}">
-            <!--i class="bi bi-search" id="search-btn"></i-->
-            <input class="form-control me-2" type="search" placeholder="Pesquisar" name="pesquisa" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit" id="search-btn">Pesquisar</button>
-            </form>
-        </div>
-    </nav>
-        
-    
-
-
+{% extends "index.html" %}
+{% block principal %}
+    {% if pesquisa %}
+        <h1>Você pesquisou por: {{pesquisa}}</h1>
+        <br>
+        {% for consulta in consulta %}
+            <div><a href="{% url 'resenha' id=consulta.id %}">{{ consulta }}</a></div>
+            
+        {% endfor %}
+    {% endif %}
 {% endblock %}
