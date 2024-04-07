@@ -4,15 +4,15 @@
 
     <nav class="navbar bg-body-tertiary" id="navPesquisa">
         <div class=" container-fluid d-flex justify-content-center">
-            <form method="GET" id="search-form" class="d-flex shadow p-3 mb-5 bg-body-tertiary rounded" role="search">
+            <form method="GET" id="search-form" class="d-flex shadow p-3 mb-5 bg-body-tertiary rounded" role="search" action="{% url 'pesquisa' %}">
             <!--i class="bi bi-search" id="search-btn"></i-->
-            <input class="form-control me-2" type="search" placeholder="Pesquisar por título" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit" id="search-btn">Pesquisar</button>
+            <input class="form-control me-2" type="search" placeholder="Pesquisar" name="pesquisa" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit" id="search-btn">Pesquisar</button>
             </form>
         </div>
     </nav>
         
-
+    
 
 
 {% endblock %}

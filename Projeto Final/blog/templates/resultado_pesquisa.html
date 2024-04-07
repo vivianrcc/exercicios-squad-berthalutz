@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% block principal %}
+    {% if pesquisa %}
+        <h1>Você pesquisou por: {{pesquisa}}</h1>
+        <br>
+        {% for consulta in consulta %}
+            <div><a href="{% url 'resenha' id=consulta.id %}">{{ consulta }}</a></div>
+            
+        {% endfor %}
+    {% endif %}
+{% endblock %}
