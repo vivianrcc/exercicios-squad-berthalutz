@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from blog.models import Post, Comentario, Cadastro
+from blog.models import Post, Comentario
 from blog.forms import ComentarioForm, CadastroForm
 
 
@@ -67,14 +67,14 @@ def pesquisar_livro(request):
                consulta = Post.objects.filter(titulo__icontains=pesquisa) | \
                     Post.objects.filter(autor__icontains=pesquisa) | \
                     Post.objects.filter(content__icontains=pesquisa)
-                print('consulta', consulta[0].id)
+                    # print('consulta', consulta[0].id)
             return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
         except ValueError:
             consulta = Post.objects.all()
             return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
 
 
-def realizar_cadastro(request):
+def realizar_cadastro(request): 
     sucesso = False
     if request.method == "GET":
         form = CadastroForm()
@@ -86,8 +86,13 @@ def realizar_cadastro(request):
         return render(
             request,
             "cadastro_logado.html",
-            {"cadastros": Cadastro.objects.all()},
+            {"cadastros": Post.objects.all()},
         )
     contexto = {"form": form, "sucesso": sucesso}
     return render(request, "cadastro.html", contexto)
 
+def editar_livros(request):
+    sucesso = False 
+    if request.method == "GET":
+        livros = Post.objects.all()
+    return render(request, "cadastro_logado.html", {"livros": livros})
