@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Post, Comentario, Cadastro
+from blog.models import Post, Comentario
 
 # Register your models here.
 
@@ -24,9 +24,3 @@ class ComentarioAdmin(admin.ModelAdmin):
     class Meta:
         verbose_name = "Comentários"
         ordering = ["-data2"]
-
-
-@admin.register(Cadastro)
-class LivroAdmin(admin.ModelAdmin):
-    list_display = ("nome_do_livro", "autor", "data_cadastro")
-    list_filter = ("data_cadastro",)

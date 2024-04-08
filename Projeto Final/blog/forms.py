@@ -1,5 +1,5 @@
 from django import forms
-from blog.models import Comentario, Cadastro
+from blog.models import Comentario, Post
 
 
 class ComentarioForm(forms.ModelForm):
@@ -22,13 +22,13 @@ class ComentarioForm(forms.ModelForm):
 
 
 class CadastroForm(forms.ModelForm):
-    nome_do_livro = forms.CharField(
+    titulo = forms.CharField(
         label="Nome do livro:",
         required=True,
         max_length=100,
         widget=forms.TextInput(attrs={"class": "form-control"}),
     )
-    nota_do_livro = nota_do_livro = forms.IntegerField(
+    nota = forms.IntegerField(
         label="Nota do livro:",
         required=True,
         min_value=1,
@@ -43,7 +43,13 @@ class CadastroForm(forms.ModelForm):
         max_length=100,
         widget=forms.TextInput(attrs={"class": "form-control"}),
     )
-    resenha = forms.CharField(
+    preview = forms.CharField(
+        label="Preview:",
+        required=True,
+        max_length=500,
+        widget=forms.TextInput(attrs={"class": "form-control mb-3"}),
+    )
+    content = forms.CharField(
         label="Resenha:",
         required=True,
         max_length=500,
@@ -51,5 +57,5 @@ class CadastroForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Cadastro
-        fields = ["nome_do_livro", "nota_do_livro", "autor", "resenha"]
+        model = Post
+        fields = ["titulo", "autor", "preview", "nota", "content"]

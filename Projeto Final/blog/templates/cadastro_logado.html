@@ -16,12 +16,14 @@
             </tr>
         </thead>        
         <tbody >
-            {% for cadsatro in cadastros%}
+            {% for livro in livros %}
             <tr>
-                <td>{{cadastro.nome}}</td>
-                <td>{{cadastro.autor}}</td>
-                <td>{{cadastro.nota}}</td>
-                <td>{{cadsatro.descricao}}</td>
+                <td>{{livro.titulo}}</td>
+                <td>{{livro.autor}}</td>
+                <td>{{livro.date}}</td>
+                <td>{{livro.nota}}</td>
+                <td>{{livro.preview}}</td>
+                <td>{{livro.content}}</td>
             </tr>
             {% endfor %}
         </tbody>
