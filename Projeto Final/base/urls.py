@@ -18,8 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from blog.views import index_html
 from blog.views import resenha_do_livro
-from blog.views import pesquisar_livro
- 
+from blog.views import pesquisar_livro 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
