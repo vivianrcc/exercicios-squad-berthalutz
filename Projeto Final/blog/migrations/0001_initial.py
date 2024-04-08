@@ -7,32 +7,74 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Comentario',
+            name="Comentario",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('usuario', models.CharField(blank=True, max_length=50)),
-                ('comentario', models.TextField(max_length=200)),
-                ('data2', models.DateField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("usuario", models.CharField(blank=True, max_length=50)),
+                ("comentario", models.TextField(max_length=200)),
+                ("data2", models.DateField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('titulo', models.CharField(max_length=100)),
-                ('autor', models.CharField(max_length=70)),
-                ('date', models.DateTimeField(auto_now_add=True)),
-                ('preview', models.TextField(max_length=200)),
-                ('content', models.TextField()),
-                ('slug', models.SlugField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("titulo", models.CharField(max_length=100)),
+                ("autor", models.CharField(max_length=70)),
+                ("date", models.DateTimeField(auto_now_add=True)),
+                ("preview", models.TextField(max_length=200)),
+                ("content", models.TextField()),
+                ("slug", models.SlugField()),
             ],
             options={
-                'ordering': ['-date'],
+                "ordering": ["-date"],
             },
+        ),
+        migrations.CreateModel(
+            name="Cadastro",
+            fields=[
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "nome_do_livro",
+                    models.CharField(max_length=100, blank=False, null=False),
+                ),
+                (
+                    "nota_do_livro",
+                    models.IntegerField(
+                        blank=False, null=False, choices=[(i, i) for i in range(1, 6)]
+                    ),
+                ),
+                ("autor", models.CharField(max_length=100, blank=False, null=False)),
+                ("resenha", models.TextField(blank=False, null=False)),
+                ("data_cadastro", models.DateTimeField(auto_now_add=True)),
+            ],
         ),
     ]
