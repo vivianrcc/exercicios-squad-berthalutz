@@ -63,24 +63,15 @@ def pesquisar_livro(request):
             print("pesquisa", pesquisa)
 
             if type(pesquisa) == str or None:
-                consulta = (
-                    Post.objects.filter(titulo__icontains=pesquisa)
-                    | Post.objects.filter(autor__icontains=pesquisa)
-                    | Post.objects.filter(content__icontains=pesquisa)
-                )
-                print("consulta", consulta[0].id)
-            return render(
-                request,
-                "resultado_pesquisa.html",
-                {"pesquisa": pesquisa, "consulta": consulta},
-            )
+
+               consulta = Post.objects.filter(titulo__icontains=pesquisa) | \
+                    Post.objects.filter(autor__icontains=pesquisa) | \
+                    Post.objects.filter(content__icontains=pesquisa)
+                print('consulta', consulta[0].id)
+            return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
         except ValueError:
             consulta = Post.objects.all()
-            return render(
-                request,
-                "resultado_pesquisa.html",
-                {"pesquisa": pesquisa, "consulta": consulta},
-            )
+            return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
 
 
 def realizar_cadastro(request):
@@ -99,3 +90,4 @@ def realizar_cadastro(request):
         )
     contexto = {"form": form, "sucesso": sucesso}
     return render(request, "cadastro.html", contexto)
+
