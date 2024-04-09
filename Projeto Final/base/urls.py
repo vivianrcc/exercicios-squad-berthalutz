@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog.views import index_html
-from blog.views import resenha_do_livro, pesquisar_livro, realizar_cadastro, editar_livros
+from blog.views import resenha_do_livro, pesquisar_livro, realizar_cadastro, editar_livros, editar_um_livro
 
 
 urlpatterns = [
@@ -27,5 +27,6 @@ urlpatterns = [
     path("livro/<int:id>", resenha_do_livro, name="resenha"),
     path("pesquisar/", pesquisar_livro, name="pesquisa"),
     path("cadastrar/", realizar_cadastro, name="cadastrar"),
-    path("editar_livros/", editar_livros, name='editar_livros')
+    path("editar_livros/", editar_livros, name='editar_livros'),
+    path("editar_livros/<int:id>", editar_um_livro, name='editar_um_livro')
 ]
