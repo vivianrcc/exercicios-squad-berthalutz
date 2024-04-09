@@ -1,17 +1,20 @@
 {% extends "index.html" %}
+{% load static %}
 {% load bootstrap5 %}
 {% block principal %}
 
   {% for item in posts1 %}
-    <div class="div-dos-posts">
-        <h3 class="titulo">{{item.titulo}}</h1><br>
-        <h3 class="nota">Nota do livro: {{item.nota}}</h2><br>
+    <div class="container div-dos-posts" id="postPreview">
+      <div class="row " id="postPreview_Row">
+        <div class="col-lg-8 mx-auto "> 
+          <h3 class="titulo fs-3 text-uppercase">{{item.titulo}}</h1><br>
+          <h3 class="nota fs-6">Nota do livro: {{item.nota}}</h2><br>
 
-        <h4 class="preview">Preview:</h3>
-            <p>{{item.preview}}</p>
-        <a href="{% url 'resenha' id=item.id %}"><button class="btn btn-outline-primary">Continue Lendo</button></a> <br><br>
-
-
+          <h4 class="preview fs-4">Preview:</h3>
+              <p>{{item.preview}}</p>
+          <a href="{% url 'resenha' id=item.id %}"><button class="btn btn-outline-primary">Continue Lendo</button></a> <br><br>
+        </div>
+      </div>
     </div>
   {% endfor %}
 {% endblock %}
