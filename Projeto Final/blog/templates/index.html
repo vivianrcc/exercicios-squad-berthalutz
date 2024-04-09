@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="pt-br" data-bs-theme="auto">
 <head><script src="../assets/js/color-modes.js"></script>
@@ -7,10 +8,12 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
-    <title>Cursos online</title>
+    <title>Blog da Squad Bertha Lutz</title>
 
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/starter-template/"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css\style.css' %}"/>
 
     <style>
     .bd-placeholder-img {
@@ -91,7 +94,7 @@
 
 </head>
 <body>
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+   <!-- <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check2" viewBox="0 0 16 16">
         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
     </symbol>
@@ -140,46 +143,61 @@
         </button>
         </li>
     </ul>
-    </div>
+    </div>-->
 
     
 
 <div class=" mx-auto p-4 py-md-5 ">
     <header class="d-flex align-items-center pb-3 border-bottom justify-content-between" id="headerSquadBertha">
-        <div class="d-flex flex-column align-items-center">
             <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none" id="aHeaderSquad">
-                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                <!--<svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg-->
                 <span class="fs-4">Squad Bertha Lutz</span>
-            </a>   
+            </a> 
+            <div class="col-8 col-sm-12 col-md-10 col-lg-6">
+                <img src="{% static 'img\logo2.png' %}" class="rounded mx-auto d-block" alt="...">
+            </div> 
+
             <a href="{%url 'cadastrar'%}" class="btn btn-outline-primary">Cadastrar Livro</a>
-        </div>
-        <form class="d-flex" action="{% url 'pesquisa' %}" method="GET">
-        {% csrf_token %}
-        <input class="form-control me-2" type="search" name="pesquisa" placeholder="Pesquisar" aria-label="Search">
-        <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
-        </form>
     </header>
-
-
-
-<main>
-    <h1 class="text-body-emphasis">Blog de Livros</h1>
     
 
-    <p class="fs-5 col-md-8">Resenha dos livros preferidos das integrantes do squad</p>
+
+<!--BARRA DO BLOG + PESQUISA-->
+<main>
+    <div class="container-fluid" id="conteinerTitulo">
+        <h1 class="text-body-emphasis text-center text-uppercase">Blog de Livros</h1>
+        <p class="fs-5 text-center text-uppercase">Resenha dos livros preferidos das integrantes do squad</p>
+        <div class="row-fluid">
+            <div class="rounded float-start">
+                <img src="{% static 'img\livro_fundoRosa.png' %}" id="img1">
+                <img src="{% static 'img\livroAberto_fundoR.png' %}" id="img2">
+                <img src="{% static 'img\livroAberto_lado_Rosa.png'%}" id="img3">
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar bg-body-tertiary" id="navPesquisa">
+        <div class=" container-fluid d-flex justify-content-center">
+            <form class="d-flex shadow p-3 mb-5 bg-body-tertiary rounded col-8 col-sm-12 col-md-10 col-lg-6" action="{% url 'pesquisa' %}" method="GET" id="search-form">
+                {% csrf_token %}
+                <input id="inputPesquisa"  class="form-control me-2" type="search" name="pesquisa" placeholder="Pesquisar" aria-label="Search">
+                <button class="btn btn-outline-primary" type="submit" id="search-btn">Pesquisar</button>
+            </form>
+        </div>
+    </nav>
 
     {% block principal %}
 
     {% endblock %}
 </main>
-<footer class="pt-5 my-5 text-body-secondary border-top">
+<footer class="container-fluid d-flex justify-content-center pt-5 my-5 text-body-secondary border-top">
     Criado por Mariana Choratto, Laura Perroni, Raissa, Leidejane, Cláudia, Adriana, Elizabeth, Vivian 
 </footer>
 </div>
 
 
 <script src="/static/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/"></script>
 
 
 </body>
