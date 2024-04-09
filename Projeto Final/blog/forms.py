@@ -53,7 +53,7 @@ class CadastroForm(forms.ModelForm):
         label="Resenha:",
         required=True,
         max_length=500,
-        widget=forms.TextInput(attrs={"class": "form-control mb-3"}),
+        widget=forms.Textarea(attrs={"class": "form-control mb-3"}),
     )
 
     class Meta:

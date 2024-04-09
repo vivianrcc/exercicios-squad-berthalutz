@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from blog.models import Post, Comentario
 from blog.forms import ComentarioForm, CadastroForm
+from django.contrib.auth.models import User
+import json
+from django.http import QueryDict
+
 
 
 # View da página inicial
@@ -95,4 +99,39 @@ def editar_livros(request):
     sucesso = False 
     if request.method == "GET":
         livros = Post.objects.all()
+    users = User.objects.filter(username='mariana').exists()  
+    print('users:', users)
     return render(request, "cadastro_logado.html", {"livros": livros})
+
+def editar_um_livro(request, id):
+    if request.method == "GET":
+        livro = Post.objects.get(pk=id)
+        form = CadastroForm(instance=livro)
+        return render(request, "editar_um_livro.html", {"livro": livro, 'form':form})
+    elif request.method == "POST":
+        print('PASSEI POR AQUI')
+        print(id)
+        sucesso = False 
+        # data = QueryDict(request.body)
+        # some_value = data.get('some_key')
+        # print('data', data)
+        form = CadastroForm(request.POST)
+        # form.save()
+        livro = Post.objects.get(pk=id)
+        livro.titulo = form['titulo'].value()
+        livro.nota = form['nota'].value()
+        livro.autor = form['autor'].value()
+        livro.preview = form['preview'].value()
+        livro.content = form['content'].value()
+        livro.save()
+        form = CadastroForm(request.POST, instance=livro)
+        sucesso = True
+        livro = Post.objects.get(pk=id)
+        contexto= {
+            "sucesso": sucesso,
+            "form":form,
+            "livro": livro
+        }
+        print('livro', livro)
+        form = CadastroForm(instance=livro)
+        return render(request, "editar_um_livro.html", contexto)
