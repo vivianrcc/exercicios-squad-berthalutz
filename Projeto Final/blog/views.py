@@ -71,10 +71,10 @@ def pesquisar_livro(request):
                consulta = Post.objects.filter(titulo__icontains=pesquisa) | \
                     Post.objects.filter(autor__icontains=pesquisa) | \
                     Post.objects.filter(content__icontains=pesquisa)
-            return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
+            return render(request, "preview_livros.html",{"posts1": consulta, 'pesquisa': pesquisa, 'consulta':consulta})
         except ValueError:
             consulta = Post.objects.all()
-            return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
+            return render(request, "preview_livros.html", {"posts1": consulta, 'pesquisa': pesquisa, 'consulta':consulta})
 
 #cadastrar livro novo no banco de dados
 def realizar_cadastro_de_livro(request): 
