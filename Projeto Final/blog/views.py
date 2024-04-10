@@ -108,7 +108,6 @@ def ir_para_o_admin(request):
 
 #botão de excluir
 def excluir(request, id):
-    print('id', id)
     excluir_livro = get_object_or_404(Post, pk=id)
     excluir_livro.delete()
 
@@ -147,7 +146,6 @@ def editar_um_livro(request, id):
 
 #página de login 
 def cadastrar(request):
-    print('PASSEI POR AQUI')
     form= CadastroUsuarioForm()
     login_form = AuthenticationForm()
     if request.method == 'POST':
@@ -170,11 +168,9 @@ def fazer_login(request):
         if login_form.is_valid():
             username = login_form.cleaned_data.get('username')
             password = login_form.cleaned_data.get('password')
-            print('username', username)
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                print('\n \n \n \n  auth', request.user.is_authenticated)
                 return redirect("editar_livros")
 
 def logoff(request):

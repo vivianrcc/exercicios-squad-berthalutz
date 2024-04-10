@@ -26,13 +26,13 @@
                       {% csrf_token %}
                         <div class="mb-3">
                               <p  class="m-1"><strong>{{ login_form.username.label_tag }}</strong></p>
-                              {{ login_form.username }}
+                              {{ form.username }}
 
                         </div>
 
                         <div class="mb-3">
                               <p class="m-1"><strong>{{ login_form.password.label_tag }}</strong></p>
-                            {{ login_form.password }}
+                            {{ form.password }}
                             
                         </div>
                             
