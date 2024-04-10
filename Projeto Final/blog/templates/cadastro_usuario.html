@@ -22,22 +22,22 @@
       <div class="col-5 card">
             <div class="card-body">
                   <h3 class="card-header text-center ">Login</h3>
-                  <form action="" method="POST" id="form" novalidate>
+                  <form action="{% url 'login' %}" method="POST" id="form" novalidate>
                       {% csrf_token %}
                         <div class="mb-3">
-                              <p  class="m-1"><strong>{{ form.username.label_tag }}</strong></p>
+                              <p  class="m-1"><strong>{{ login_form.username.label_tag }}</strong></p>
                               {{ form.username }}
 
                         </div>
 
                         <div class="mb-3">
-                              <p class="m-1"><strong>{{ form.password.label_tag }}</strong></p>
+                              <p class="m-1"><strong>{{ login_form.password.label_tag }}</strong></p>
                             {{ form.password }}
                             
                         </div>
                             
                             <br>
-                      <a href="{% url 'login' %}" ><button type="submit" class="btn btn-primary btn-block">Login</button></a>
+                      <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </form>
             </div>
       </div>
