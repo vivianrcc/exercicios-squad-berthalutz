@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
+from django.shortcuts import get_object_or_404
 
 
 # View da página inicial
@@ -77,37 +78,39 @@ def pesquisar_livro(request):
 
 #cadastrar livro novo no banco de dados
 def realizar_cadastro_de_livro(request): 
-    sucesso = False
-    if request.method == "GET":
-        form = CadastroForm()
-    else:
-        form = CadastroForm(request.POST)
-        if form.is_valid():
-            sucesso = True
-            form.save()
-        return render(
-            request,
-            "cadastro_logado.html",
-            {"cadastros": Post.objects.all()},
-        )
-    contexto = {"form": form, "sucesso": sucesso}
-    return render(request, "cadastro.html", contexto)
+    if request.user.is_authenticated:
+        sucesso = False
+        if request.method == "GET":
+            form = CadastroForm()
+        else:
+            form = CadastroForm(request.POST)
+            if form.is_valid():
+                sucesso = True
+                form.save()
+            return render(
+                request,
+                "cadastro_logado.html",
+                {"cadastros": Post.objects.all()},
+            )
+        contexto = {"form": form, "sucesso": sucesso}
+        return render(request, "cadastro.html", contexto)
 
 #tabela de livros cadastrados
 def editar_livros(request):
-    sucesso = False 
-    if request.method == "GET":
-        livros = Post.objects.all()
-    users = User.objects.filter(username='mariana').exists()  
-    return render(request, "cadastro_logado.html", {"livros": livros})
+    if request.user.is_authenticated:
+        if request.method == "GET":
+            livros = Post.objects.all()
+        return render(request, "cadastro_logado.html", {"livros": livros})
 
 #botão para ir para o admin
 def ir_para_o_admin(request):
     return render(request, "admin.site.urls")
 
 #botão de excluir
-def excluir(request, livro_id):
-    excluir_livro = Post.objects.get(pk=livro_id)
+def excluir(request, id):
+    print('id', id)
+    excluir_livro = get_object_or_404(Post, pk=id)
+    excluir_livro.delete()
 
     if request.method == "GET":
         livros = Post.objects.all()
@@ -115,30 +118,31 @@ def excluir(request, livro_id):
 
 #página de edição de um livro individual
 def editar_um_livro(request, id):
-    if request.method == "GET":
-        livro = Post.objects.get(pk=id)
-        form = CadastroForm(instance=livro)
-        return render(request, "editar_um_livro.html", {"livro": livro, 'form':form})
-    elif request.method == "POST":
-        sucesso = False 
-        form = CadastroForm(request.POST)
-        livro = Post.objects.get(pk=id)
-        livro.titulo = form['titulo'].value()
-        livro.nota = form['nota'].value()
-        livro.autor = form['autor'].value()
-        livro.preview = form['preview'].value()
-        livro.content = form['content'].value()
-        livro.save()
-        form = CadastroForm(request.POST, instance=livro)
-        sucesso = True
-        livro = Post.objects.get(pk=id)
-        contexto= {
-            "sucesso": sucesso,
-            "form":form,
-            "livro": livro
-        }
-        form = CadastroForm(instance=livro)
-        return render(request, "editar_um_livro.html", contexto)
+    if request.user.is_authenticated:
+        if request.method == "GET":
+            livro = Post.objects.get(pk=id)
+            form = CadastroForm(instance=livro)
+            return render(request, "editar_um_livro.html", {"livro": livro, 'form':form})
+        elif request.method == "POST":
+            sucesso = False 
+            form = CadastroForm(request.POST)
+            livro = Post.objects.get(pk=id)
+            livro.titulo = form['titulo'].value()
+            livro.nota = form['nota'].value()
+            livro.autor = form['autor'].value()
+            livro.preview = form['preview'].value()
+            livro.content = form['content'].value()
+            livro.save()
+            form = CadastroForm(request.POST, instance=livro)
+            sucesso = True
+            livro = Post.objects.get(pk=id)
+            contexto= {
+                "sucesso": sucesso,
+                "form":form,
+                "livro": livro
+            }
+            form = CadastroForm(instance=livro)
+            return render(request, "editar_um_livro.html", contexto)
     
 
 #página de login 
