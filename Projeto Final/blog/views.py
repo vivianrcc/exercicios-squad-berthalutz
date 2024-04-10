@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from blog.models import Post, Comentario
-from blog.forms import ComentarioForm, CadastroForm, CadastroUsuarioForm, LoginForm
+from blog.forms import ComentarioForm, CadastroForm, CadastroUsuarioForm
 from django.contrib.auth.models import User
-from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
@@ -12,7 +11,7 @@ from django.shortcuts import get_object_or_404
 def index_html(request):
     posts = Post.objects.all()  # o valor de posts é uma lista de objetos
     return render(
-        request, "post_preview.html", {"posts1": posts}
+        request, "preview_livros.html", {"posts1": posts}
     )  # você pega o valor da chave no HTML
 
 
@@ -40,7 +39,7 @@ def resenha_do_livro(request, id):
 
 # view da resenha do livro (função chamada acima)
 def get_resenha(request, dataToBePassed):
-    return render(request, "post1.html", dataToBePassed)
+    return render(request, "resenha_de_livro.html", dataToBePassed)
 
 
 # view do formulário de comentários (função chamada acima)
@@ -57,7 +56,7 @@ def post_resenha(request, dataToBePassed):
         )
         new_comment.save()
 
-        return render(request, "post1.html", dataToBePassed)
+        return render(request, "resenha_de_livro.html", dataToBePassed)
 
 
 # view da barra de pesquisa
@@ -89,18 +88,18 @@ def realizar_cadastro_de_livro(request):
                 form.save()
             return render(
                 request,
-                "cadastro_logado.html",
+                "tabela_de_livros.html",
                 {"cadastros": Post.objects.all()},
             )
         contexto = {"form": form, "sucesso": sucesso}
-        return render(request, "cadastro.html", contexto)
+        return render(request, "cadastro_de_livros.html", contexto)
 
 #tabela de livros cadastrados
-def editar_livros(request):
+def tabela_de_livros(request):
     if request.user.is_authenticated:
         if request.method == "GET":
             livros = Post.objects.all()
-        return render(request, "cadastro_logado.html", {"livros": livros})
+        return render(request, "tabela_de_livros.html", {"livros": livros})
 
 #botão para ir para o admin
 def ir_para_o_admin(request):
@@ -114,7 +113,7 @@ def excluir(request, id):
 
     if request.method == "GET":
         livros = Post.objects.all()
-    return render(request, "cadastro_logado.html", {"livros": livros} )
+    return render(request, "tabela_de_livros.html", {"livros": livros} )
 
 #página de edição de um livro individual
 def editar_um_livro(request, id):
@@ -160,7 +159,7 @@ def cadastrar(request):
             return redirect("editar_livros")
         else: 
             form = CadastroUsuarioForm()
-    return render(request, "fazer_cadastro.html", {"form": form, "login_form": login_form})
+    return render(request, "cadastro_usuario.html", {"form": form, "login_form": login_form})
 
 
 def login(request):

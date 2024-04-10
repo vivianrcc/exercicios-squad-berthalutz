@@ -85,22 +85,3 @@ class CadastroUsuarioForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["username","email", "password"]
-
-class LoginForm(forms.ModelForm):
-    username= forms.CharField(
-        label="Usuário:",
-        required=True,
-        max_length=100,
-        widget=forms.TextInput(attrs={"class": "form-control"}),
-    )
-        
-    password= forms.CharField(
-        label="Senha:",
-        required=True,
-        max_length=50,
-        widget=forms.TextInput(attrs={"class": "form-control", "type": "password"}),
-    )
-
-    class Meta:
-        model = User
-        fields = ["username", "password"]

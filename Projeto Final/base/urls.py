@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from blog.views import index_html
-from blog.views import resenha_do_livro, pesquisar_livro, realizar_cadastro_de_livro, editar_livros, editar_um_livro, ir_para_o_admin, cadastrar, login, excluir
+from blog.views import resenha_do_livro, pesquisar_livro, realizar_cadastro_de_livro, editar_um_livro, ir_para_o_admin, cadastrar, login, excluir, tabela_de_livros
 
 
 urlpatterns = [
@@ -26,8 +26,8 @@ urlpatterns = [
     path("", index_html),
     path("livro/<int:id>", resenha_do_livro, name="resenha"),
     path("pesquisar/", pesquisar_livro, name="pesquisa"),
-    path("cadastrar/", realizar_cadastro_de_livro, name="cadastrar"),
-    path("editar_livros/", editar_livros, name='editar_livros'),
+    path("cadastrar_livro/", realizar_cadastro_de_livro, name="cadastrar_livro"),
+    path("tabela_de_livros/", tabela_de_livros, name='editar_livros'),
     path("editar_livros/<int:id>", editar_um_livro, name='editar_um_livro'),
     path("excluir/<int:id>/", excluir, name='excluir'),
     path("login/", login, name='login'),
