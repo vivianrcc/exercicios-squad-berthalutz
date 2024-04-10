@@ -2,35 +2,40 @@
 {% load bootstrap5 %}
 {% block principal %}
 {% load static %}
-
-<h1 class="text-doby-emphasis"> Livros Cadastrados</h1>
-<br>
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nome do livro:</th>
-                <th>Autor:</th>
-                <th>Data:</th>
-                <th>Nota:</th>
-                <th>Preview:</th>
-                <th>Resenha:</th>
-                <th>Editar:</th>
-            </tr>
-        </thead>        
-        <tbody >
-            {% for livro in livros %}
-            <tr>
-                <td>{{livro.titulo}}</td>
-                <td>{{livro.autor}}</td>
-                <td>{{livro.date}}</td>
-                <td>{{livro.nota}}</td>
-                <td>{{livro.preview}}</td>
-                <td>{{livro.content}}</td>
-                <td><a href="{% url 'editar_um_livro' id=livro.id %}"><button class="btn btn-success">Editar</button></a></td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="container-fluid" id="cadastroLivro">
+    <div class="row " id="telaCadastroLogado">
+      <div class="col-lg-8 mx-auto "> 
+            <h1 class="text-doby-emphasis"> Livros Cadastrados</h1>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome do livro:</th>
+                            <th>Autor:</th>
+                            <th>Data:</th>
+                            <th>Nota:</th>
+                            <th>Preview:</th>
+                            <th>Resenha:</th>
+                            <th>Editar:</th>
+                        </tr>
+                    </thead>        
+                    <tbody >
+                        {% for livro in livros %}
+                        <tr>
+                            <td>{{livro.titulo}}</td>
+                            <td>{{livro.autor}}</td>
+                            <td>{{livro.date}}</td>
+                            <td>{{livro.nota}}</td>
+                            <td>{{livro.preview}}</td>
+                            <td>{{livro.content}}</td>
+                            <td><a href="{% url 'editar_um_livro' id=livro.id %}"><button class="btn btn-success">Editar</button></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 {%endblock%}

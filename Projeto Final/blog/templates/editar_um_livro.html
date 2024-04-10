@@ -1,22 +1,26 @@
 {% extends "index.html" %}
 {% load bootstrap5 %}
 {% block principal %}
+<div class="container" id="cadastroLivro">
+  <div class="row " id="telaCadastro">
+    <div class="col-lg-8 mx-auto "> 
+      <h1 class="text-body-emphasis">Editar de Livros</h1>
+        
+        <form action="{% url 'editar_um_livro' id=livro.id %}" method="POST" id="form" novalidate>
+          {% csrf_token %}
+          {% for field in form.visible_fields %}
+              <div class="mb-3">
+                <p class="m-0 mb-1"><strong>{{field.label}}</strong></p> 
+                <div>{{field}}</div>
+              </div>
+          {% endfor %}
+          <button type="submit" class="btn btn-primary btn-block">Salvar mudanças</button>
+        </form>
 
-  <h1 class="text-body-emphasis">Editar de Livros</h1>
-    
-    <form action="{% url 'editar_um_livro' id=livro.id %}" method="POST" id="form" novalidate>
-      {% csrf_token %}
-      {% for field in form.visible_fields %}
-          <div class="mb-3">
-            <p class="m-0 mb-1"><strong>{{field.label}}</strong></p> 
-            <div>{{field}}</div>
-          </div>
-      {% endfor %}
-      <button type="submit" class="btn btn-primary btn-block">Salvar mudanças</button>
-    </form>
-
-    {% if sucesso %}
-      <p class="alert alert-success mt-3">Cadastro efetuado com sucesso! </p>
-    {% endif %}
-    
+        {% if sucesso %}
+          <p class="alert alert-success mt-3">Cadastro efetuado com sucesso! </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
