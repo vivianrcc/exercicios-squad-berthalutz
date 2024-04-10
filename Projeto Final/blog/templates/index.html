@@ -159,7 +159,13 @@
                 <img src="{% static 'img\logo2.png' %}" class="rounded mx-auto d-block" alt="...">
             </div> 
 
-            <a href="{%url 'cadastrar'%}" class="btn btn-outline-primary">Cadastrar Livro</a>
+            <div>
+                <a href="{% url 'cadastro' %}" class="btn btn-outline-primary">Cadastrar Usuário</a>
+                <a href="{% url 'logoff' %}" class="btn btn-outline-danger btn-sm">Logoff</a>
+            </div>
+
+        </div>
+
     </header>
     
 
@@ -178,12 +184,13 @@
         </div>
     </div>
 
-    <nav class="navbar bg-body-tertiary" id="navPesquisa">
+    <nav class="navbar bg-body-tertiary mb-5" id="navPesquisa">
         <div class=" container-fluid d-flex justify-content-center">
             <form class="d-flex shadow p-3 mb-5 bg-body-tertiary rounded col-8 col-sm-12 col-md-10 col-lg-6" action="{% url 'pesquisa' %}" method="GET" id="search-form">
                 {% csrf_token %}
-                <input id="inputPesquisa"  class="form-control me-2" type="search" name="pesquisa" placeholder="Pesquisar" aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit" id="search-btn">Pesquisar</button>
+
+                    <input class="form-control me-2" type="search" name="pesquisa" placeholder="Pesquisar" aria-label="Search" id="inputPesquisa">
+                    <button class="btn btn-outline-primary" type="submit" id="search-btn">Pesquisar</button>
             </form>
         </div>
     </nav>
