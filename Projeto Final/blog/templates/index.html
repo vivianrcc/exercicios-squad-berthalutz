@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
-    <title>Cursos online</title>
+    <title>Blog de Livros do Squad</title>
 
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/starter-template/"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -153,11 +153,14 @@
             </a>   
             <a href="{% url 'cadastro' %}" class="btn btn-outline-primary">Cadastrar Usuário</a>
         </div>
-        <form class="d-flex" action="{% url 'pesquisa' %}" method="GET">
-        {% csrf_token %}
-        <input class="form-control me-2" type="search" name="pesquisa" placeholder="Pesquisar" aria-label="Search">
-        <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
-        </form>
+        <div class="d-flex gap-3 align-items-center">
+            <form class="d-flex" action="{% url 'pesquisa' %}" method="GET">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" name="pesquisa" placeholder="Pesquisar" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+            </form>
+            <a href="{% url 'logoff' %}" class="btn btn-outline-danger btn-sm">Logoff</a>
+        </div>
     </header>
 
 

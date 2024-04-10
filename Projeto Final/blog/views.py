@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
+from django.contrib import auth
 
 
 # View da página inicial
@@ -172,3 +173,7 @@ def login(request):
             login(request, user)
             print('\n \n \n \n  auth', request.user.is_authenticated)
             return redirect("editar_livros")
+
+def logoff(request):
+    auth.logout(request)
+    return redirect("cadastro")
