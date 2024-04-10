@@ -1,17 +1,21 @@
 {% extends "index.html" %}
+{% load static %}
 {% load bootstrap5 %}
 {% block principal %}
+<div class="container ">
+  <div class="div-dos-posts row justify-content-md-center" id="postPreview">
+    {% for item in posts1 %}
+        <div class="shadow  m-4 col-12 col-sm-12 col-md-6 col-lg-3" id="postPreview_Row">
+          <div class="h-100"> 
+            <h3 class="titulo fs-3 text-uppercase">{{item.titulo}}</h1><br>
+            <h3 class="nota fs-6">Nota do livro: {{item.nota}}</h2><br>
 
-  {% for item in posts1 %}
-    <div class="div-dos-posts">
-        <h3 class="titulo">{{item.titulo}}</h1><br>
-        <h3 class="nota">Nota do livro: {{item.nota}}</h2><br>
-
-        <h4 class="preview">Preview:</h3>
+            <h4 class="preview fs-4">Preview:</h3>
             <p>{{item.preview}}</p>
-        <a href="{% url 'resenha' id=item.id %}"><button class="btn btn-outline-primary">Continue Lendo</button></a> <br><br>
-
-
-    </div>
-  {% endfor %}
+            <div class="" id="botaoContinueLendo"><a href="{% url 'resenha' id=item.id %}"><button class="btn btn-outline-primary">Continue Lendo</button></a></div> <br><br>
+          </div>
+        </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
