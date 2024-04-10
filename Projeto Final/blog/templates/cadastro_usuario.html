@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+{% block principal %}
+
+<section class="d-flex justify-content-center gap-5">
+      <div class="col-5 card">
+            <div class="card-body">
+                  <h3 class="card-header text-center">Cadastro</h3>
+                  <form action="" method="POST" id="form" novalidate>
+                      {% csrf_token %}
+                      {% for field in form.visible_fields %}
+                          <div class="mb-3">
+                                <p class="m-1"><strong>{{field.label}}</strong></p> 
+                                <div>{{field}}</div>
+                          </div>
+                
+                            {% endfor %}
+                            <br>
+                      <a href="{% url 'cadastrar_livro' %}" ><button type="submit" class="btn btn-primary btn-block">Cadastrar</button></a>
+                    </form>
+            </div>
+      </div>
+      <div class="col-5 card">
+            <div class="card-body">
+                  <h3 class="card-header text-center ">Login</h3>
+                  <form action="" method="POST" id="form" novalidate>
+                      {% csrf_token %}
+                        <div class="mb-3">
+                              <p  class="m-1"><strong>{{ form.username.label_tag }}</strong></p>
+                              {{ form.username }}
+
+                        </div>
+
+                        <div class="mb-3">
+                              <p class="m-1"><strong>{{ form.password.label_tag }}</strong></p>
+                            {{ form.password }}
+                            
+                        </div>
+                            
+                            <br>
+                      <a href="{% url 'login' %}" ><button type="submit" class="btn btn-primary btn-block">Login</button></a>
+                    </form>
+            </div>
+      </div>
+
+
+</section>
+
+{% endblock %}

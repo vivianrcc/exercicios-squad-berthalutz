@@ -33,20 +33,3 @@ class Comentario(models.Model):
     def __str__(self):
         return f"Comentário de {self.usuario}"
 
-
-class Cadastro(models.Model):
-    nome_do_livro = models.CharField(max_length=100, blank=False, null=False)
-    nota_do_livro = models.IntegerField(
-        blank=False, null=False, choices=[(i, i) for i in range(1, 6)]
-    )
-    autor = models.CharField(max_length=100, blank=False, null=False)
-    resenha = models.TextField(blank=False, null=False)
-    data_cadastro = models.DateTimeField(auto_now_add=True)
-
-    # def __str__(self):
-    #     return f"{self.nome_do_livro} - {self.autor}"
-
-    # class Meta:
-    #     verbose_name = "Cadastro"
-    #     verbose_name_plural = "Cadastros"
-    #     ordering = ["-data_cadastro"]
