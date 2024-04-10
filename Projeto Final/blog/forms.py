@@ -48,13 +48,13 @@ class CadastroForm(forms.ModelForm):
     preview = forms.CharField(
         label="Preview:",
         required=True,
-        max_length=500,
+        max_length=200,
         widget=forms.TextInput(attrs={"class": "form-control mb-3"}),
     )
     content = forms.CharField(
         label="Resenha:",
         required=True,
-        max_length=500,
+        max_length=1500,
         widget=forms.Textarea(attrs={"class": "form-control mb-3"}),
     )
 
