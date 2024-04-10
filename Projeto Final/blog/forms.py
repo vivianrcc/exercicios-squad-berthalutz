@@ -1,5 +1,7 @@
 from django import forms
 from blog.models import Comentario, Post
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 class ComentarioForm(forms.ModelForm):
@@ -59,3 +61,46 @@ class CadastroForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ["titulo", "autor", "preview", "nota", "content"]
+
+class CadastroUsuarioForm(forms.ModelForm):
+    username= forms.CharField(
+        label="Usuário:",
+        required=True,
+        max_length=100,
+        widget=forms.TextInput(attrs={"class": "form-control"}),
+    )
+
+    email= forms.EmailField(
+        label='Email:',
+        required=True,
+        max_length=100,
+        widget=forms.EmailInput(attrs={"class": "form-control"}),
+    )
+    password= forms.CharField(
+        label="Senha:",
+        required=True,
+        max_length=50,
+        widget=forms.TextInput(attrs={"class": "form-control", "type": "password"}),
+    )
+    class Meta:
+        model = User
+        fields = ["username","email", "password"]
+
+class LoginForm(forms.ModelForm):
+    username= forms.CharField(
+        label="Usuário:",
+        required=True,
+        max_length=100,
+        widget=forms.TextInput(attrs={"class": "form-control"}),
+    )
+        
+    password= forms.CharField(
+        label="Senha:",
+        required=True,
+        max_length=50,
+        widget=forms.TextInput(attrs={"class": "form-control", "type": "password"}),
+    )
+
+    class Meta:
+        model = User
+        fields = ["username", "password"]

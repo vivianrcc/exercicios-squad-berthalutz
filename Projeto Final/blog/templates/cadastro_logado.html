@@ -5,6 +5,7 @@
 
 <h1 class="text-doby-emphasis"> Livros Cadastrados</h1>
 <br>
+<a href="{%url 'cadastrar'%}" class="btn btn-primary">Cadastrar Novo Livro</a>
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -16,6 +17,7 @@
                 <th>Preview:</th>
                 <th>Resenha:</th>
                 <th>Editar:</th>
+                <th>Excluir:</th>
             </tr>
         </thead>        
         <tbody >
@@ -28,9 +30,14 @@
                 <td>{{livro.preview}}</td>
                 <td>{{livro.content}}</td>
                 <td><a href="{% url 'editar_um_livro' id=livro.id %}"><button class="btn btn-success">Editar</button></a></td>
+                <td><a href="{% url 'editar_um_livro' id=livro.id %}"><button class="btn btn-danger">Excluir</button></a></td>
             </tr>
+
             {% endfor %}
+
         </tbody>
     </table>
+    <!-- <p>Ainda está tendo problemas de edição? Vá para a página de adminitração:</p>
+    <a href="#" class="btn btn-primary">Administração</a> -->
 </div>
 {%endblock%}

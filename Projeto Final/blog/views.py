@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
 from blog.models import Post, Comentario
-from blog.forms import ComentarioForm, CadastroForm
+from blog.forms import ComentarioForm, CadastroForm, CadastroUsuarioForm, LoginForm
 from django.contrib.auth.models import User
-import json
-from django.http import QueryDict
-
+from django.contrib import auth
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
 
 
 # View da página inicial
@@ -64,21 +64,19 @@ def pesquisar_livro(request):
     if request.method == "GET":
         try:
             pesquisa = request.GET.get("pesquisa", None)
-            print("pesquisa", pesquisa)
 
             if type(pesquisa) == str or None:
 
                consulta = Post.objects.filter(titulo__icontains=pesquisa) | \
                     Post.objects.filter(autor__icontains=pesquisa) | \
                     Post.objects.filter(content__icontains=pesquisa)
-                    # print('consulta', consulta[0].id)
             return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
         except ValueError:
             consulta = Post.objects.all()
             return render(request, 'pesquisa.html', {'pesquisa': pesquisa, 'consulta':consulta})
 
-
-def realizar_cadastro(request): 
+#cadastrar livro novo no banco de dados
+def realizar_cadastro_de_livro(request): 
     sucesso = False
     if request.method == "GET":
         form = CadastroForm()
@@ -95,28 +93,35 @@ def realizar_cadastro(request):
     contexto = {"form": form, "sucesso": sucesso}
     return render(request, "cadastro.html", contexto)
 
+#tabela de livros cadastrados
 def editar_livros(request):
     sucesso = False 
     if request.method == "GET":
         livros = Post.objects.all()
     users = User.objects.filter(username='mariana').exists()  
-    print('users:', users)
     return render(request, "cadastro_logado.html", {"livros": livros})
 
+#botão para ir para o admin
+def ir_para_o_admin(request):
+    return render(request, "admin.site.urls")
+
+#botão de excluir
+def excluir(request, livro_id):
+    excluir_livro = Post.objects.get(pk=livro_id)
+
+    if request.method == "GET":
+        livros = Post.objects.all()
+    return render(request, "cadastro_logado.html", {"livros": livros} )
+
+#página de edição de um livro individual
 def editar_um_livro(request, id):
     if request.method == "GET":
         livro = Post.objects.get(pk=id)
         form = CadastroForm(instance=livro)
         return render(request, "editar_um_livro.html", {"livro": livro, 'form':form})
     elif request.method == "POST":
-        print('PASSEI POR AQUI')
-        print(id)
         sucesso = False 
-        # data = QueryDict(request.body)
-        # some_value = data.get('some_key')
-        # print('data', data)
         form = CadastroForm(request.POST)
-        # form.save()
         livro = Post.objects.get(pk=id)
         livro.titulo = form['titulo'].value()
         livro.nota = form['nota'].value()
@@ -132,6 +137,35 @@ def editar_um_livro(request, id):
             "form":form,
             "livro": livro
         }
-        print('livro', livro)
         form = CadastroForm(instance=livro)
         return render(request, "editar_um_livro.html", contexto)
+    
+
+#página de login 
+def cadastrar(request):
+    form= CadastroUsuarioForm()
+    login_form = AuthenticationForm()
+    if request.method == 'POST':
+        form= CadastroUsuarioForm(request.POST)
+        if form.is_valid() and not User.objects.filter(username=form['username'].value()).exists():
+            User.objects.create_user(
+                username=form['username'].value(),
+                password=form['password'].value(),
+                email=form['email'].value()
+            )
+            return redirect("editar_livros")
+        else: 
+            form = CadastroUsuarioForm()
+    return render(request, "fazer_cadastro.html", {"form": form, "login_form": login_form})
+
+
+def login(request):
+    if request.method == "POST":
+        login_form= AuthenticationForm(request, data=request.POST)
+        username = login_form.cleaned_data.get('username')
+        password = login_form.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print('\n \n \n \n  auth', request.user.is_authenticated)
+            return redirect("editar_livros")
