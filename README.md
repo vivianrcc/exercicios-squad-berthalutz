@@ -32,7 +32,7 @@ Este repositório contém todos os exercícios de python da semana 3 resolvidos 
 *  Decidimos nos ajudar como equipe e cobrir para nossas colegas que não conseguirem fazer tudo que lhes foi delegado mas que comunicaram-se conosco e tentaram fazer sua parte, pois somos um time e devemos nos ajudar sempre :)
 * Cada arquivo .py contém a proposta da atividade e a aluna responsável pela resolução, organizamos por semana e módulo
 * Decidimos que cada uma escolheria um exercício para fazer e fizemos um tutorial para nos ajudar a melhor trabalhar: 
-* Também trabalhamos em Call no Discord algumas vezes.
+* Também trabalhamos em Call no Discord várias vezes.
     
     Passo-a-passo:
 
@@ -119,3 +119,9 @@ Gabriela
 Laura
 ### Melhorar design:
 Laura
+
+# Projeto Final
+(Utilizar a branch: main)
+
+Fizemos o projeto final em pedaços, por calls no discord, e portanto não houve uma divisão de trabalho como fizemos nas outras atividades.
+Foi interessante variar o método de trabalho e gostamos bastante.
