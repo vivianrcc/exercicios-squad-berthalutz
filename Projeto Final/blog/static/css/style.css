@@ -68,9 +68,9 @@
     border: 0.5px solid rgb(245, 148, 180);
 }*/
 #telaCadastro{
-    border-right: 1px solid rgb(119, 115, 115);
-    border-left: 1px solid rgb(119, 115, 115);
-    border-bottom: 1px solid rgb(119, 115, 115);
+    border-right: 1px solid #f89ab9;
+    border-left: 1px solid #f89ab9;
+    border-bottom: 1px solid #f89ab9;
     padding-top: 100px;
     padding-bottom: 30px;
 }
@@ -80,6 +80,10 @@
 #telaCadastroLogado{
     padding-top: 100px;
     padding-bottom: 30px;
+    
+}
+#div_cadastroLivros{
+    border-left: 5px solid #f89ab9;
 }
 #search-form{
     background-color: white;
@@ -88,9 +92,7 @@
     z-index: 9999;
    
 }
-#headerSquadBertha{
 
-}
 #aHeaderSquad{
     color: black;
 }
@@ -99,4 +101,69 @@
 }
 #comentarios{
     padding-bottom: 50px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #f882a9;
+    border-color: #f89ab9;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{
+    background-color: #e71259;
+    color: #ffffff;
+    border-color: #facddc;
+    box-shadow: 0 0 0 0.25rem rgba(227, 163, 190, 0.5);
+}
+.btn-primary:active:focus, .btn-primary:active{
+    box-shadow: 0 0 0 0.25rem rgba(192, 39, 103, 0.5);
+}
+.btn-outline-primary {
+    color: #e71259;
+    border-color: #f882a9;
+}
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:focus, .btn-outline-primary:active:focus{
+    background-color: #f5688c;
+    color: #ffffff;
+    border-color: #facddc;
+    box-shadow: 0 0 0 0.25rem rgb(239 194 207 / 50%);
+}
+.btn-outline-danger {   
+    color: #3b016a;
+    border-color: #4a0681;
+}
+.btn-outline-danger:hover, .btn-outline-danger:active {
+    background-color: #dbbbf6;
+    color: #200129;
+    border-color: #dbbbf6;
+    
+}
+.btn-outline-danger:focus{
+    box-shadow: 0 0 0 0.25rem rgb(143 53 220 / 50%);
+}
+.btn-success {
+    color: #fff;
+    background-color: #bd8ce6;
+    border-color: #9150a6;
+}
+.btn-success:hover, .btn-success:active, .btn-success:focus, .btn-success:active:focus{
+    background-color: #9f46e8;
+    color: #fff;
+    border-color: #9150a6;
+    box-shadow: 0 0 0 0.25rem rgba(217, 159, 253, 0.5);
+}
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #f8b9d0;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(252 0 107 / 25%);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #080808;
+    
+    box-shadow: inset 0 0 20px 20px #efc8c829;
 }
