@@ -4,15 +4,19 @@
     <div class="container div-dos-posts" id="post">
         <div class="row"> 
             <div class="col-lg-8 mx-auto shadow " id="div_postPublicado">
-                <h2 class="mt-2 titulo text-uppercase fs-3">{{posts.titulo}}</h2><br>
-                <p class="autor fs-6">Autor: {{posts.autor}}</p><br>
-                <h4 class="nota fs-6 col-2 col-sm-2 col-md-2 col-lg-2" id="notaLivro_Post">Nota do livro: {{posts.nota}}</h4><br>
-
-                <p class="data-publicacao fs-7">Data de Publicação: {{posts.date}}</p>
-                
-
-                <h3 class="fs-4">Resenha:</h3>
-                <p class="content">{{posts.content}}</p><br><br>
+                <h2 class="mt-2 titulo text-uppercase fs-3 text-center">{{posts.titulo}}</h2><br>
+                <div class="d-flex gap-4">
+                    <div class="imagem-livro col-3">
+                        <img class="img-fluid" src="{{ fotografia.imagem.url }}">
+                    </div>
+                    <div class="col-9">
+                        <h4 class="autor fs-6">Autor: {{posts.autor}}</h4>
+                        <h4 class="nota fs-6 col-2 col-sm-2 col-md-2 col-lg-2 w-100" id="notaLivro_Post">Nota do livro: {{posts.nota}}</h4>
+                        <h4 class="data-publicacao fs-6">Data de Publicação:{{posts.date}}</h4>
+                        <h3 class="fs-4 text-center mt-3">Resenha:</h3>
+                        <p class="content text-justified">{{posts.content}}</p><br><br>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -24,6 +28,7 @@
                 <form action="{% url 'resenha' id=id_do_livro %}" method="POST" id="form">
 
                     {% csrf_token %}
+                    
 
                     {% for field in form.visible_fields %}
                     <p>{{field.label}}</p> 
@@ -32,7 +37,7 @@
                     {% endfor %}
 
                     {% if sucesso %}
-                    <p class="alert alert-success">Cadastro efetuado com sucesso! </p>
+                    <p class="alert alert-success">Comentario adicionado com sucesso! </p>
                     {% endif %}
 
                     <button type="submit" class="btn btn-primary btn-block mb-3">Enviar comentário</button>

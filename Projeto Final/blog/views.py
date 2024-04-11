@@ -25,12 +25,14 @@ def resenha_do_livro(request, id):
     comentarios = Comentario.objects.order_by("-data2").filter(id_livro_id=id)
     sucesso = False
     form = ComentarioForm()
+    fotografia = fotografia = get_object_or_404(Post, pk=id)
     dataToBePassed = {
         "posts": posts,
         "form": form,
         "sucesso": sucesso,
         "id_do_livro": id_do_livro,
         "comentarios": comentarios,
+        "fotografia": fotografia, 
     }
     if request.method == "GET":
         return get_resenha(request, dataToBePassed)
@@ -83,15 +85,12 @@ def realizar_cadastro_de_livro(request):
         if request.method == "GET":
             form = CadastroForm()
         else:
-            form = CadastroForm(request.POST)
+            form = CadastroForm(request.POST, request.FILES)
             if form.is_valid():
                 sucesso = True
                 form.save()
-            return render(
-                request,
-                "tabela_de_livros.html",
-                {"cadastros": Post.objects.all()},
-            )
+                livros = Post.objects.all()
+                return render(request, "tabela_de_livros.html",{"livros": livros})
         contexto = {"form": form, "sucesso": sucesso}
         return render(request, "cadastro_de_livros.html", contexto)
 
@@ -101,10 +100,6 @@ def tabela_de_livros(request):
         if request.method == "GET":
             livros = Post.objects.all()
         return render(request, "tabela_de_livros.html", {"livros": livros})
-
-#botão para ir para o admin
-def ir_para_o_admin(request):
-    return render(request, "admin.site.urls")
 
 #botão de excluir
 def excluir(request, id):
@@ -144,10 +139,11 @@ def editar_um_livro(request, id):
             return render(request, "editar_um_livro.html", contexto)
     
 
-#página de login 
+#página de login/cadastro 
 def cadastrar(request):
     form= CadastroUsuarioForm()
     login_form = AuthenticationForm()
+    erro = False
     if request.method == 'POST':
         form= CadastroUsuarioForm(request.POST)
         if form.is_valid() and not User.objects.filter(username=form['username'].value()).exists():
@@ -156,13 +152,16 @@ def cadastrar(request):
                 password=form['password'].value(),
                 email=form['email'].value()
             )
+            # erro - False
             return redirect("editar_livros")
         else: 
             form = CadastroUsuarioForm()
-    return render(request, "cadastro_usuario.html", {"form": form, "login_form": login_form})
+            erro = True
+    return render(request, "cadastro_usuario.html", {"form": form, "login_form": login_form, "erro": erro})
 
 
 def fazer_login(request):
+    erro = False
     if request.method == "POST":
         login_form= AuthenticationForm(request, data=request.POST)
         if login_form.is_valid():
@@ -172,6 +171,11 @@ def fazer_login(request):
             if user is not None:
                 login(request, user)
                 return redirect("editar_livros")
+        else:
+            login_form= AuthenticationForm()
+            form= CadastroUsuarioForm()
+            erro_login = True
+            return render(request, "cadastro_usuario.html", {"erro_login": erro_login, "login_form": login_form, "form": form})
 
 def logoff(request):
     auth.logout(request)

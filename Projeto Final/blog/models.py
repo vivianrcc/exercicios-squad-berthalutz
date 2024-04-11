@@ -16,6 +16,7 @@ class Post(models.Model):
 
     nota = models.IntegerField(blank=True, choices=nota_livro)
     content = models.TextField(blank=False, null=False)
+    imagem = models.ImageField(upload_to="imagem/", blank=True)
 
     class Meta:
         ordering = ["-date"]
