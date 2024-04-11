@@ -4,16 +4,19 @@
 <div class="container-fluid" >
   <div class="row " id="telaCadastroLogado">
     <div class="col-lg-8 mx-auto " id="div_cadastroLivros">
-      <h1 class="text-body-emphasis">Cadastro de Livros</h1>
+      <h1 class="text-body-emphasis text-center">Cadastro de Livros</h1>
         
       {% if sucesso %}
         <p class="alert alert-success"> Cadastro realizado com sucesso </p>
       {% else %}
-        <form action="" method="POST" id="form" novalidate>
+        <form action="" method="POST" id="form" novalidate enctype="multipart/form-data">
           {% csrf_token %}
           {% for field in form.visible_fields %}
-                <p>{{field.label}}</p> 
+              <div class="mb-3">
+                <p class="mb-1">{{field.label}}</p>
                 <div>{{field}}</div>
+
+              </div>
 
                 {% endfor %}
           <a href="{% url 'cadastrar_livro' %}" ><button type="submit" class="btn btn-primary btn-block">Cadastrar</button></a>

@@ -25,12 +25,14 @@ def resenha_do_livro(request, id):
     comentarios = Comentario.objects.order_by("-data2").filter(id_livro_id=id)
     sucesso = False
     form = ComentarioForm()
+    fotografia = fotografia = get_object_or_404(Post, pk=id)
     dataToBePassed = {
         "posts": posts,
         "form": form,
         "sucesso": sucesso,
         "id_do_livro": id_do_livro,
         "comentarios": comentarios,
+        "fotografia": fotografia, 
     }
     if request.method == "GET":
         return get_resenha(request, dataToBePassed)
@@ -83,7 +85,7 @@ def realizar_cadastro_de_livro(request):
         if request.method == "GET":
             form = CadastroForm()
         else:
-            form = CadastroForm(request.POST)
+            form = CadastroForm(request.POST, request.FILES)
             if form.is_valid():
                 sucesso = True
                 form.save()

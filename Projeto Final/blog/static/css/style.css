@@ -167,3 +167,12 @@ input:-webkit-autofill:active{
     
     box-shadow: inset 0 0 20px 20px #efc8c829;
 }
+
+.imagem-livro{
+    /* max-width: 200px; */
+}
+
+.content{
+    max-width: 90%;
+    text-align: justify;
+}
