@@ -57,7 +57,9 @@ class CadastroForm(forms.ModelForm):
         max_length=1500,
         widget=forms.Textarea(attrs={"class": "form-control mb-3"}),
     )
-    imagem = forms.ImageField(label="Imagem:")
+    imagem = forms.ImageField(
+        label="Imagem:",
+        )
     class Meta:
         model = Post
         fields = ["titulo", "autor", "preview", "nota", "content", "imagem"]
