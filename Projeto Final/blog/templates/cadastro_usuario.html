@@ -17,6 +17,9 @@
                               <br>
                         <a href="{% url 'cadastrar_livro' %}" ><button type="submit" class="btn btn-primary btn-block">Cadastrar</button></a>
                         </form>
+                        {% if erro %}
+                              <p class="alert alert-danger mt-3">Erro na criação do cadastro. Tente novamente.  </p>
+                        {% endif %}
                   </div>
             </div>
             <div class="col-5 card">
@@ -39,6 +42,9 @@
                               <br>
                         <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </form>
+                        {% if erro_login %}
+                              <p class="alert alert-danger mt-3">Erro no login. Tente novamente.  </p>
+                        {% endif %}
                   </div>
             </div>
 
