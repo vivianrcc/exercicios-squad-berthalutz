@@ -82,11 +82,11 @@ def pesquisar_livro(request):
 def realizar_cadastro_de_livro(request): 
     if request.user.is_authenticated:
         sucesso = False
+        print('PASSEI AQI', request.method )
         if request.method == "GET":
             form = CadastroForm()
         else:
             form = CadastroForm(request.POST, request.FILES)
-            print('PASSEI AQI', form.errors )
             if form.is_valid():
                 sucesso = True
                 form.save()
@@ -120,13 +120,15 @@ def editar_um_livro(request, id):
             return render(request, "editar_um_livro.html", {"livro": livro, 'form':form})
         elif request.method == "POST":
             sucesso = False 
-            form = CadastroForm(request.POST)
+            form = CadastroForm(request.POST, request.FILES)
+            print('asdasdsadsad',  request.FILES['imagem'])
             livro = Post.objects.get(pk=id)
             livro.titulo = form['titulo'].value()
             livro.nota = form['nota'].value()
             livro.autor = form['autor'].value()
             livro.preview = form['preview'].value()
             livro.content = form['content'].value()
+            livro.imagem = request.FILES['imagem']
             livro.save()
             form = CadastroForm(request.POST, instance=livro)
             sucesso = True

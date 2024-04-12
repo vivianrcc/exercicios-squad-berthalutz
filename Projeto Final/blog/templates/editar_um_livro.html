@@ -6,7 +6,7 @@
     <div class="col-lg-8 mx-auto "> 
       <h1 class="text-body-emphasis">Editar de Livros</h1>
         
-        <form action="{% url 'editar_um_livro' id=livro.id %}" method="POST" id="form" novalidate>
+        <form action="{% url 'editar_um_livro' id=livro.id %}" method="POST" id="form" novalidate enctype="multipart/form-data">
           {% csrf_token %}
           {% for field in form.visible_fields %}
               <div class="mb-3">
