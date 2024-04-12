@@ -17,7 +17,6 @@
                         <th>Data:</th>
                         <th>Nota:</th>
                         <th>Preview:</th>
-                        <th>Resenha:</th>
                         <th>Editar:</th>
                         <th>Excluir:</th>
                     </tr>
@@ -30,7 +29,6 @@
                         <td>{{livro.date}}</td>
                         <td>{{livro.nota}}</td>
                         <td>{{livro.preview}}</td>
-                        <td>{{livro.content}}</td>
                         <td><a href="{% url 'editar_um_livro' id=livro.id %}"><button class="btn btn-success">Editar</button></a></td>
                         <td><a href="{% url 'excluir' id=livro.id %}"><button class="btn btn-danger">Excluir</button></a></td>
                     </tr>

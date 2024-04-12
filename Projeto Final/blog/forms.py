@@ -54,10 +54,14 @@ class CadastroForm(forms.ModelForm):
     content = forms.CharField(
         label="Resenha:",
         required=True,
-        max_length=1500,
+        max_length=3000,
         widget=forms.Textarea(attrs={"class": "form-control mb-3"}),
     )
-    imagem = forms.ImageField(label="Imagem:")
+
+    imagem = forms.ImageField(
+        label="Imagem:",
+        required=False
+        )
     class Meta:
         model = Post
         fields = ["titulo", "autor", "preview", "nota", "content", "imagem"]
