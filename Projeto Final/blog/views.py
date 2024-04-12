@@ -86,6 +86,7 @@ def realizar_cadastro_de_livro(request):
             form = CadastroForm()
         else:
             form = CadastroForm(request.POST, request.FILES)
+            print('PASSEI AQI', form.errors )
             if form.is_valid():
                 sucesso = True
                 form.save()
