@@ -6,9 +6,11 @@
             <div class="col-lg-8 mx-auto shadow " id="div_postPublicado">
                 <h2 class="mt-2 titulo text-uppercase fs-3 text-center">{{posts.titulo}}</h2><br>
                 <div class="d-flex gap-4">
+                    {% if fotografia.imagem %}
                     <div class="imagem-livro col-3">
                         <img class="img-fluid" src="{{ fotografia.imagem.url }}">
                     </div>
+                    {% endif %}
                     <div class="col-9">
                         <h4 class="autor fs-6">Autor: {{posts.autor}}</h4>
                         <h4 class="nota fs-6 col-2 col-sm-2 col-md-2 col-lg-2 w-100" id="notaLivro_Post">Nota do livro: {{posts.nota}}</h4>
