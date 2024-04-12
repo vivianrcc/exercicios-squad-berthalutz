@@ -161,7 +161,12 @@
             </div> 
 
             <div>
+                {% if user.is_authenticated %}
+                <p>Olá, {{ user.username }}!</p>
+                <a href="{% url 'editar_livros' %}" class="btn btn-outline-primary py-2">Editar livros</a>
+                {% else %}
                 <a href="{% url 'cadastro' %}" class="btn btn-outline-primary py-2">Cadastrar Usuário</a>
+                {% endif %}
                 <a href="{% url 'logoff' %}" class="btn btn-outline-danger btn-sm py-2">Logoff</a>
             </div>
 

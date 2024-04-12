@@ -82,7 +82,6 @@ def pesquisar_livro(request):
 def realizar_cadastro_de_livro(request): 
     if request.user.is_authenticated:
         sucesso = False
-        print('PASSEI AQI', request.method )
         if request.method == "GET":
             form = CadastroForm()
         else:
@@ -97,7 +96,9 @@ def realizar_cadastro_de_livro(request):
 
 #tabela de livros cadastrados
 def tabela_de_livros(request):
+    print('PASSEI AQI', request.user.is_authenticated )
     if request.user.is_authenticated:
+        print('TABELA DE LIVROS')
         if request.method == "GET":
             livros = Post.objects.all()
         return render(request, "tabela_de_livros.html", {"livros": livros})
@@ -121,7 +122,6 @@ def editar_um_livro(request, id):
         elif request.method == "POST":
             sucesso = False 
             form = CadastroForm(request.POST, request.FILES)
-            print('asdasdsadsad',  request.FILES['imagem'])
             livro = Post.objects.get(pk=id)
             livro.titulo = form['titulo'].value()
             livro.nota = form['nota'].value()
@@ -147,6 +147,7 @@ def cadastrar(request):
     form= CadastroUsuarioForm()
     login_form = AuthenticationForm()
     erro = False
+    sucesso= False
     if request.method == 'POST':
         form= CadastroUsuarioForm(request.POST)
         if form.is_valid() and not User.objects.filter(username=form['username'].value()).exists():
@@ -155,12 +156,13 @@ def cadastrar(request):
                 password=form['password'].value(),
                 email=form['email'].value()
             )
-            # erro - False
-            return redirect("editar_livros")
+            sucesso= True
+            erro = False
+            return render(request, "cadastro_usuario.html", {"form": form, "login_form": login_form, "erro": erro, "sucesso": sucesso})
         else: 
             form = CadastroUsuarioForm()
             erro = True
-    return render(request, "cadastro_usuario.html", {"form": form, "login_form": login_form, "erro": erro})
+    return render(request, "cadastro_usuario.html", {"form": form, "login_form": login_form, "erro": erro, "sucesso": sucesso})
 
 
 def fazer_login(request):
