@@ -48,6 +48,9 @@
                         {% if erro_login %}
                               <p class="alert alert-danger mt-3">Erro no login. Tente novamente.  </p>
                         {% endif %}
+                        <p>Ainda está com problemas de edição? Vá para a página de administração:</p>
+                        <a href="{% url 'admin:index' %}" class="btn btn-primary">Administração</a>
+
                   </div>
             </div>
 
