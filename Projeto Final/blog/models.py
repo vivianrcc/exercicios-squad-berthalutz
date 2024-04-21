@@ -12,6 +12,7 @@ class Post(models.Model):
     titulo= models.CharField(blank=False, max_length=100, null=False )
     autor= models.CharField(blank=False, max_length=70, null=False ) 
     date= models.DateTimeField(auto_now_add=True)
+    categoria = models.CharField(max_length=100, blank=True, null=True)
     preview= models.TextField(blank=False, max_length=200, null=False)
 
     nota = models.IntegerField(blank=True, choices=nota_livro)
