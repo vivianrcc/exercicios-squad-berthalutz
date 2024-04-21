@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 
 # View da página inicial
@@ -95,6 +96,7 @@ def realizar_cadastro_de_livro(request):
         return render(request, "cadastro_de_livros.html", contexto)
 
 #tabela de livros cadastrados
+@login_required
 def tabela_de_livros(request):
     print('PASSEI AQI', request.user.is_authenticated )
     if request.user.is_authenticated:
